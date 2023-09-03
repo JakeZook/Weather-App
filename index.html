@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-dark bg-gradient text-light">
+    <header class="header text-center bg-primary p-2">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <div class="row text-center">
+        <section class="search col-md-4 mt-4">
+            <section id="search-section" class="border-bottom pb-4">
+                <h2>Search for a city:</h2>
+                <input type="text" name="city-search" id="city-search">
+                <button id="search-button">Search</button>
+            </section>
+            <section id="recent-searches">
+                <ul class="list-unstyled pt-4">
+
+                </ul>
+            </section>
+
+        </section>
+
+        <section class="weather-display col-md-8 mt-4 text-left">
+            <section id="current-weather" class="border p-2 mb-4">
+                <h2 id="current-day"></h2>
+                <h3 id="current-time"></h3>
+                <h3 id="current-city"></h3>
+                <p>Temp: 00</p>
+                <p>Wind: 00</p>
+                <p>Humidity: 00</p>
+            </section>
+
+            <section id="five-day" class="text-center">
+                <h3>5-Day Forecast:</h3>
+                <div class="cards row">
+                    <div class="card bg-primary m-2 col" style="width: 10rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">00/00/00</h5>
+                            <h5 class="card-text">Temp: 00</h5>
+                            <p class="card-text">Wind: 00</p>
+                            <p class="card-text">Humidity: 00</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-primary m-2 col" style="width: 10rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">00/00/00</h5>
+                            <h5 class="card-text">Temp: 00</h5>
+                            <p class="card-text">Wind: 00</p>
+                            <p class="card-text">Humidity: 00</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-primary m-2 col" style="width: 10rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">00/00/00</h5>
+                            <h5 class="card-text">Temp: 00</h5>
+                            <p class="card-text">Wind: 00</p>
+                            <p class="card-text">Humidity: 00</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-primary m-2 col" style="width: 10rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">00/00/00</h5>
+                            <h5 class="card-text">Temp: 00</h5>
+                            <p class="card-text">Wind: 00</p>
+                            <p class="card-text">Humidity: 00</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-primary m-2 col" style="width: 10rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">00/00/00</h5>
+                            <h5 class="card-text">Temp: 00</h5>
+                            <p class="card-text">Wind: 00</p>
+                            <p class="card-text">Humidity: 00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
