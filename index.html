@@ -16,6 +16,7 @@
         <section class="search col-md-4 mt-4">
             <section id="search-section" class="border-bottom pb-4">
                 <h2>Search for a city:</h2>
+                <h3 id="error" class="text-danger"></h3>
                 <input type="text" name="city-search" id="city-search">
                 <button id="search-button">Search</button>
             </section>
@@ -24,17 +25,15 @@
 
                 </ul>
             </section>
-
         </section>
 
         <section class="weather-display col-md-8 mt-4 text-left">
             <section id="current-weather" class="border p-2 mb-4">
                 <h2 id="current-day"></h2>
                 <h3 id="current-time"></h3>
-                <h3 id="current-city"></h3>
-                <p>Temp: 00</p>
-                <p>Wind: 00</p>
-                <p>Humidity: 00</p>
+                <p id="temp">Temp: 00</p>
+                <p id="wind">Wind: 00</p>
+                <p id="humidity">Humidity: 00</p>
             </section>
 
             <section id="five-day" class="text-center">
