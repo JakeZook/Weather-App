@@ -4,51 +4,23 @@ var errorMsg = $('#error');
 var currentDateDisplay = $("#current-day");
 var currentTimeDisplay = $('#current-time');
 var currentWeatherDisplay = $('#current-weather');
+var currentIcon = $('#current-icon');
 
 var cards = $('.cards');
 
-var weatherLink = "https://api.openweathermap.org/data/2.5/daily?q=";
+var currentWeatherLink = "https://api.openweathermap.org/data/2.5/weather?q=";
+var forecastWeatherLink = "http://api.openweathermap.org/data/2.5/forecast?q=";
 var key = "&appid=7cd6cced0b36f44c52ae06a0e7f9848c&units=imperial";
-
-var city;
-var currentCity = localStorage.getItem("currentCity");
 
 var date = dayjs();
 
+var currentCity = localStorage.getItem("Current-City")
+
 $(errorMsg).text("");
 
-displayWeather();
+getData();
 
-function handleSearch(event)
-{
-    event.preventDefault();
-    let cityInput = $('#city-search').val();
-    
-    city = cityInput;
-    let requestURL = weatherLink + city + key;
-
-    fetch(requestURL)
-    .then(function (response) {
-        if (response.ok)
-        {
-            $(errorMsg).text("");
-            return response.json();
-        }
-        else if (response.status === 404)
-        {
-            $(errorMsg).text("City not found");
-        }
-    })
-    .then(function (data) {
-        $('#city-search').val('');
-        localStorage.setItem(data.city.name, JSON.stringify(data));
-        localStorage.setItem("currentCity", data.city.name);
-        currentCity = localStorage.getItem("currentCity");
-        displayWeather();
-    })
-}
-
-function displayWeather()
+function getData()
 {
     if (currentCity == null)
     {
@@ -58,27 +30,75 @@ function displayWeather()
 
     else
     {
-        let cityData = JSON.parse(localStorage.getItem(currentCity));
+        let requestCurrent = currentWeatherLink + currentCity + key;
+        let requestForecast = forecastWeatherLink + currentCity + key;
 
-        $(currentDateDisplay).text(cityData.city.name + " " + date.format("MM/DD/YYYY"));
-        $(currentTimeDisplay).text(date.format("h:mm a"));
+        fetch(requestCurrent)
+        .then(function (response) {
+            if (response.ok)
+            {
+                $(errorMsg).text("");
+                return response.json();
+            }
+            else if (response.status === 404)
+            {
+                $(errorMsg).text("City not found");
+            }
+        })
+        .then(function (data) {
+            $('#city-search').val('');
+            console.log(data);
 
-        $(currentWeatherDisplay).children('#temp').text
-        ("TEMP: " + cityData.list[2].main.temp + " °F");
+            displayCurrentWeather(data);
+        })
 
-        $(currentWeatherDisplay).children('#wind').text
-        ("WIND: " + cityData.list[2].wind.speed + " MPH");
+        fetch(requestForecast)
+        .then(function (response) {
+            if (response.ok)
+            {
+                $(errorMsg).text("");
+                return response.json();
+            }
+            else if (response.status === 404)
+            {
+                $(errorMsg).text("City not found");
+            }
+        })
+        .then(function (data) {
+            console.log(data);
 
-        $(currentWeatherDisplay).children('#humidity').text
-        ("HUMIDITY: " + cityData.list[2].main.humidity + " %");
-
-        displayForecast(cityData);
+            displayForecastWeather(data);
+        })
     }
 }
 
-function displayForecast(cityData)
+function handleSearch(e)
 {
-    console.log(cityData);
+    e.preventDefault();
+    let cityInput = $('#city-search').val();
+    
+    currentCity = cityInput;
+    localStorage.setItem("Current-City", currentCity);
+    getData();
+}
+
+function displayCurrentWeather(data)
+{
+    $(currentDateDisplay).text(data.name + date.format(" MM/DD/YYYY"));
+    $(currentTimeDisplay).text(date.format("h:mm a"));
+
+    $(currentWeatherDisplay).children('#temp').text
+    ("TEMP: " + data.main.temp + " °F");
+
+    $(currentWeatherDisplay).children('#wind').text
+    ("WIND: " + data.wind.speed + " MPH");
+
+    $(currentWeatherDisplay).children('#humidity').text
+    ("HUMIDITY: " + data.main.humidity + " %");
+}
+
+function displayForecastWeather(data)
+{
     for (let i = 0; i < cards.children().length; i++)
     {
         let currentCard = cards.children().eq(i);
@@ -88,9 +108,14 @@ function displayForecast(cityData)
         (forecastDate.format("MM/DD/YY"));
 
         currentCard.children().children().eq(1).text
-        ("TEMP: " + cityData.list[i].main.temp);
+        ("TEMP: " + data.list[i * 8].main.temp + "°F");
+
+        currentCard.children().children().eq(2).text
+        ("WIND: " + data.list[i * 8].wind.speed + " MPH");
+
+        currentCard.children().children().eq(3).text
+        ("HUMIDITY: " + data.list[i * 8].main.humidity + "%");
     }
 }
-
 
 searchButton.on('click', handleSearch);
