@@ -87,6 +87,10 @@ function displayCurrentWeather(data)
     $(currentDateDisplay).text(data.name + date.format(" MM/DD/YYYY"));
     $(currentTimeDisplay).text(date.format("h:mm a"));
 
+    let icon = data.weather[0].icon;
+    $(currentIcon).attr('src', "https://openweathermap.org/img/w/" + icon + ".png");
+    $(currentIcon).attr('style', 'display: block;');
+
     $(currentWeatherDisplay).children('#temp').text
     ("TEMP: " + data.main.temp + " °F");
 
@@ -107,14 +111,20 @@ function displayForecastWeather(data)
         currentCard.children().children().eq(0).text
         (forecastDate.format("MM/DD/YY"));
 
-        currentCard.children().children().eq(1).text
-        ("TEMP: " + data.list[i * 8].main.temp + "°F");
+        let icon = data.list[(i * 8) + 5].weather[0].icon;
+        currentCard.children().children().eq(1).attr
+        ('src', "https://openweathermap.org/img/w/" + icon + ".png");
+        currentCard.children().children().eq(1).attr
+        ('style', 'display: block;');
 
         currentCard.children().children().eq(2).text
-        ("WIND: " + data.list[i * 8].wind.speed + " MPH");
+        ("TEMP: " + data.list[(i * 8) + 5].main.temp + "°F");
 
         currentCard.children().children().eq(3).text
-        ("HUMIDITY: " + data.list[i * 8].main.humidity + "%");
+        ("WIND: " + data.list[(i * 8) + 5].wind.speed + " MPH");
+
+        currentCard.children().children().eq(4).text
+        ("HUMIDITY: " + data.list[(i * 8) + 5].main.humidity + "%");
     }
 }
 
