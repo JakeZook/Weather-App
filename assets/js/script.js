@@ -1,5 +1,10 @@
+//TODO:
+//1. Fix button being added when bad city searched
+//2. fix responsiveness of forecast
+
 var searchButton = $('#search-button');
 var errorMsg = $('#error');
+var recentSearchList = $('#recent-searches');
 
 var currentDateDisplay = $("#current-day");
 var currentTimeDisplay = $('#current-time');
@@ -14,11 +19,13 @@ var key = "&appid=7cd6cced0b36f44c52ae06a0e7f9848c&units=imperial";
 
 var date = dayjs();
 
+var recentSearches;
 var currentCity = localStorage.getItem("Current-City")
 
 $(errorMsg).text("");
 
 getData();
+getRecentSearches();
 
 function getData()
 {
@@ -47,8 +54,6 @@ function getData()
         })
         .then(function (data) {
             $('#city-search').val('');
-            console.log(data);
-
             displayCurrentWeather(data);
         })
 
@@ -65,8 +70,6 @@ function getData()
             }
         })
         .then(function (data) {
-            console.log(data);
-
             displayForecastWeather(data);
         })
     }
@@ -75,11 +78,31 @@ function getData()
 function handleSearch(e)
 {
     e.preventDefault();
+
     let cityInput = $('#city-search').val();
     
-    currentCity = cityInput;
-    localStorage.setItem("Current-City", currentCity);
-    getData();
+    if (cityInput.length == 0)
+    {
+        $(errorMsg).text("City not found");
+    }
+
+    else
+    {
+        $(errorMsg).text("");
+        
+        currentCity = cityInput;
+
+        localStorage.setItem("Current-City", currentCity);
+        getData();
+
+        if (!recentSearches.includes(currentCity.toUpperCase()))
+        {
+            recentSearches.push(currentCity.toUpperCase());
+            localStorage.setItem("recent-searches", JSON.stringify(recentSearches));
+            addToList();
+        }
+    }
+    
 }
 
 function displayCurrentWeather(data)
@@ -126,6 +149,46 @@ function displayForecastWeather(data)
         currentCard.children().children().eq(4).text
         ("HUMIDITY: " + data.list[(i * 8) + 5].main.humidity + "%");
     }
+}
+
+function getRecentSearches()
+{
+    if (JSON.parse(localStorage.getItem("recent-searches")) !== null)
+    {
+        recentSearches = JSON.parse(localStorage.getItem("recent-searches"));
+
+        for (let i = 0; i < recentSearches.length; i++)
+        {
+            let button = recentSearchList.append
+            ("<li><button id='" + recentSearches[i] + "'" + ">" + recentSearches[i] + "</button></li>");
+
+            button.on('click', function(e) {
+                currentCity = e.target.id;
+        
+                localStorage.setItem("Current-City", currentCity);
+                getData();
+            })
+        }
+    }
+    
+    else
+    {
+        recentSearches = [];
+    }
+}
+
+function addToList()
+{
+    let lastSearch = recentSearches.slice(-1);
+    let button = recentSearchList.append
+    ("<li><button id='" + lastSearch + "'" + ">" + lastSearch + "</button></li>");
+
+    button.on('click', function(e) {
+        currentCity = e.target.id;
+
+        localStorage.setItem("Current-City", currentCity);
+        getData();
+    })
 }
 
 searchButton.on('click', handleSearch);

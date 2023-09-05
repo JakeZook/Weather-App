@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Weather App</title>
 </head>
 <body class="bg-dark bg-gradient text-light">
     <header class="header text-center bg-primary p-2">
@@ -20,8 +20,8 @@
                 <input type="text" name="city-search" id="city-search">
                 <button id="search-button">Search</button>
             </section>
-            <section id="recent-searches">
-                <ul class="list-unstyled pt-4">
+            <section>
+                <ul id="recent-searches" class="list-unstyled pt-4">
 
                 </ul>
             </section>
@@ -37,7 +37,7 @@
                 <p id="humidity"></p>
             </section>
 
-            <section id="five-day" class="text-left text-nowrap">
+            <section id="five-day" class="text-left text-wrap">
                 <h3>5-Day Forecast:</h3>
                 <div class="cards row">
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
