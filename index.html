@@ -12,6 +12,7 @@
         <h1>Weather Dashboard</h1>
     </header>
 
+    <!-- Search section -->
     <div class="row text-center">
         <section class="search col-md-4 mt-4">
             <section id="search-section" class="border-bottom pb-4">
@@ -20,14 +21,17 @@
                 <input type="text" name="city-search" id="city-search">
                 <button id="search-button">Search</button>
             </section>
+            <!-- Recent searches list -->
             <section>
+                <h3>Recent Searches:</h3>
                 <ul id="recent-searches" class="list-unstyled pt-4">
-
                 </ul>
             </section>
         </section>
 
+        <!-- Weather display for current and forecast data -->
         <section class="weather-display col-md-8 mt-4 text-left">
+            <!-- Current weather -->
             <section id="current-weather" class="border p-2 mb-4">
                 <h2 id="current-day"></h2>
                 <h3 id="current-time"></h3>
@@ -37,9 +41,12 @@
                 <p id="humidity"></p>
             </section>
 
+            <!-- forecast weather -->
             <section id="five-day" class="text-left text-wrap">
                 <h3>5-Day Forecast:</h3>
                 <div class="cards row">
+
+                    <!-- card 1 -->
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
                         <div class="card-body">
                             <h4 class="card-title">00/00/00</h4>
@@ -50,6 +57,7 @@
                         </div>
                     </div>
 
+                    <!-- card 2 -->
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
                         <div class="card-body">
                             <h4 class="card-title">00/00/00</h4>
@@ -60,6 +68,7 @@
                         </div>
                     </div>
 
+                    <!-- card 3 -->
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
                         <div class="card-body">
                             <h4 class="card-title">00/00/00</h4>
@@ -70,6 +79,7 @@
                         </div>
                     </div>
 
+                    <!-- card 4 -->
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
                         <div class="card-body">
                             <h4 class="card-title">00/00/00</h4>
@@ -80,6 +90,7 @@
                         </div>
                     </div>
 
+                    <!-- card 5 -->
                     <div class="card bg-primary m-2 col" style="width: 10rem;">
                         <div class="card-body">
                             <h4 class="card-title">00/00/00</h4>
